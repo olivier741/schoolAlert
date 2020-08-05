@@ -1,0 +1,155 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>VIEW REGISTER</title>
+    </head>
+    <body>
+        <section layout:fragment="header">
+            <h1>REGISTERS</h1>
+            <ol class="breadcrumb">
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">VIEW REGISTER</li>
+            </ol>
+        </section>
+        <div layout:fragment="content">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Form</h3>
+                    <div class="box-tools pull-right">
+                        <a href="/registers/list" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+                    </div>
+                </div>
+                <form data-toggle="validator" role="form" th:object="${reg}" th:action="@{/registers/delete}" method="post">
+                    <div class="box-body">
+                    
+                        <div class="form-group">
+                            <label for="transactionId">TransactionID</label>
+                            <input type="text" required="true" class="form-control" 
+                                   th:field="*{transactionId}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:800px;" 
+                                   id="transactionId" />
+                        </div> 
+                        
+                        
+                        <div class="form-group">
+                            <label for="msisdn">MSISDN</label>
+                            <input type="text" required="true" class="form-control" 
+                                   th:field="*{msisdn}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:800px;" 
+                                   id="msisdn" />
+                        </div> 
+
+                        
+                        <div class="form-group">
+                            <label for="status">STATUS</label>
+                            <input type="text" required="true" class="form-control" 
+                                   th:field="*{status}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:800px;" 
+                                   id="status" />
+                        </div> 
+                        
+                         <div class="form-group">
+                            <label for="autoextend">AutoExtend</label>
+                            <input type="text" required="true" class="form-control" 
+                                   th:field="*{autoextend}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:800px;" 
+                                   id="autoextend" />
+                        </div> 
+                        
+                        
+                         <div class="form-group">
+                            <label for="regTime">Register Time</label>
+                            <div class='input-group date' style="width:800px;" id='regTime'>
+                                <input type='text' class="form-control" required="true" th:field="*{regTime}"   th:readonly="${enableEdit}"
+                                       ng-model="dateString" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="renewTime">Renew Register Time</label>
+                            <div class='input-group date' style="width:800px;" id='renewTime'>
+                                <input type='text' class="form-control" required="true" th:field="*{renewTime}"   th:readonly="${enableEdit}"
+                                       ng-model="dateString" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expireTime">Expire Time</label>
+                            <div class='input-group date' style="width:800px;" id='expireTime'>
+                                <input type='text' class="form-control" required="true" th:field="*{expireTime}"   th:readonly="${enableEdit}"
+                                       ng-model="dateString" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="unregTime">Unregister Time</label>
+                            <div class='input-group date' style="width:800px;" id='unregTime'>
+                                <input type='text' class="form-control" required="true" th:field="*{unregTime}"   th:readonly="${enableEdit}"
+                                       ng-model="dateString" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cancelTime">Cancel Time</label>
+                            <div class='input-group date' style="width:800px;" id='cancelTime'>
+                                <input type='text' class="form-control" required="true" th:field="*{cancelTime}"   th:readonly="${enableEdit}"
+                                       ng-model="dateString" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                         <div class="form-group">
+                            <label for="numberReg">Number of Registration</label>
+                            <input type="text" required="true" class="form-control" 
+                                   th:field="*{numberReg}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:800px;" 
+                                   id="numberReg" />
+                        </div> 
+                        
+                        <div class="form-group">
+                            <label for="product_code">Product</label>
+                            <input type="text" required="true" class="form-control" 
+                                   th:field="${reg.product.productCode}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:800px;" 
+                                   id="product_code" />
+                        </div> 
+                       
+
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <input type="text" class="form-control" th:field="*{description}"  th:readonly="${enableEdit}" style="width:800px;" id="description" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a th:href="@{/registers/list}" class="btn btn-default" role="button" title="Back list">
+                            <span aria-hidden="true"></span>Back To List
+                        </a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

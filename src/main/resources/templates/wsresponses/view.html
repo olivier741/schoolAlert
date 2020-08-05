@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>VIEW WS-RESPONSE</title>
+    </head>
+    <body>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>View WS-Response</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">View WS-Response</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <form data-toggle="validator" role="form" th:object="${wsresp}" th:action="@{/wsresponses/form}" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 1</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <input type="hidden" th:field="*{id}"/>
+
+
+                                  <div class="form-group">
+                                        <label for="responseCode">Responce Code</label>
+                                        <input type="text" required="true" class="form-control" 
+                                               th:field="*{responseCode}" 
+                                               th:readonly="true"
+                                               id="responseCode" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="translateResponseCode">Translated Responce Code</label>
+                                        <input type="number" required="true" class="form-control" 
+                                               th:field="*{translateResponseCode}" 
+                                               th:readonly="true"
+                                               id="translateResponseCode" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="Parameter">WS Webservice</label>
+                                        <select  class="form-control"  th:field="*{wsWebservice.webserviceName}" th:readonly="true" id="promotion_filter" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:each="wbsrv : ${listWS_Webservice}"
+                                                    th:value="${wbsrv.webserviceName}"
+                                                    th:utext="${wbsrv.webserviceName}" />
+                                        </select>
+                                    </div>
+
+                                   <div class="form-group">
+                                        <label for="Description">Description</label>
+                                        <textarea   class="form-control" th:field="*{description}" 
+                                                    th:readonly="true"
+                                                    id="description" rows="4"></textarea>
+                                    </div>
+
+
+                                    <div class='input-group date' id='createTime'>
+                                        <input type="hidden" class="form-control"  th:field="*{createTime}" 
+                                               ng-model="dateString"  />
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <a th:href="@{/wsresponses/list}" class="btn btn-secondary" role="button" title="Back-To list">
+                                <span aria-hidden="true"></span>Back To List
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </body>
+</html>

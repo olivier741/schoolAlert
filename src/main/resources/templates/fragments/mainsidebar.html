@@ -1,0 +1,484 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="sidebar">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+        <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="/myProfile" class="d-block"><span class="hidden-xs" th:text="${keycloak_username}"/></a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Setting Services
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Service
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/services/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Service</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/services/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Service</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        
+                        
+                         <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Restrict By Table
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/promotables/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Restrict Table</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/promotables/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Restrict Table</p>
+                                    </a>
+                                </li>
+                         
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Promotion
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/promotions/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Promotion</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/promotions/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Promotions</p>
+                                    </a>
+                                </li>
+                                
+                           
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Product
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/products/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Product</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/products/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Products</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Parameter
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/parameters/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Parameter</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/parameters/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Parameters</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Action
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/actions/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Action</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/actions/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Actions</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Command
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/commands/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Command</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/commands/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Commands</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Config Notification
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/notifications/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Notify-Confs</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Setting API-Gateway
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    WS-Client
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/wsclients/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add WS-Client</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/wsclients/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List WS-Clients</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    WS-Webservice
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/wswebservices/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add WS-Webservice</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/wswebservices/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List WS-Webservices</p>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="/wsresponses/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add WS-Response</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/wsresponses/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List WS-Response</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    WS-AccessMgnt
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/wsaccesmanagemets/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add WS-AccessMgnt</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/wsaccesmanagemets/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List WS-AccessMgnt</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+
+
+
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Reporting
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Register Reporting
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/registers/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Register</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+
+
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            PUSH SMS
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Submit Push SMS
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/pushsms_submit/form" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Push SMS</p>
+                                    </a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a href="/pushsms_submit/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Push SMS</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    
+                    
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Validate Push SMS
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                 <li class="nav-item">
+                                    <a href="/pushsms_validate/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Push SMS</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-plus-square"></i>
+                                <p>
+                                    Confirm Push SMS
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                 <li class="nav-item">
+                                    <a href="/pushsms_confirm/list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Push SMS</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+
+
+
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

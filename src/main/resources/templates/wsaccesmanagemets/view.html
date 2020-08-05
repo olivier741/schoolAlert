@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>VIEW WS-ACCESSMANAGEMENT</title>
+    </head>
+    <body>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>View WS-Accessmanagement</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">View WS-Accessmanagement</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <form data-toggle="validator" role="form" th:object="${wsaccess}" th:action="@{/wsaccesmanagemets/form}" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 1</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <input type="hidden" th:field="*{id}"/>
+
+
+                                    <div class="form-group">
+                                        <label for="accessName">AccessManagement Name</label>
+                                        <input type="text" required="true" class="form-control" 
+                                               th:field="*{accessName}" 
+                                                th:readonly="true"
+                                               id="accessName" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="maxConnexionAllocate">Max Connexion Allow</label>
+                                        <input type="number" required="true" class="form-control" 
+                                               th:field="*{maxConnexionAllocate}" 
+                                                th:readonly="true"
+                                               id="maxConnexionAllocate" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="maxRequestAllocate">Max Request Allow</label>
+                                        <input type="number" required="true" class="form-control" 
+                                               th:field="*{maxRequestAllocate}" 
+                                                th:readonly="true"
+                                               id="maxRequestAllocate" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="StartTime">Start Time</label>
+                                        <div class="input-group date" id="startTime" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#startTime"
+                                                   required="true" th:field="*{startTime}"    th:readonly="true"
+                                                   />
+                                            <div class="input-group-append" data-target="#startTime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="EndTime">End Time</label>
+                                        <div class="input-group date" id="endTime" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#endTime"
+                                                   required="true" th:field="*{endTime}"   th:readonly="true"
+                                                   />
+                                            <div class="input-group-append" data-target="#endTime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="WSClient">WS Client</label>
+                                        <select  class="form-control"  th:field="*{wsClient.clientName}"  th:readonly="true" id="promotion_filter" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:each="wclt : ${listWS_Client}"
+                                                    th:value="${wclt.clientName}"
+                                                    th:utext="${wclt.clientName}" />
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Parameter">WS Webservice</label>
+                                        <select  class="form-control"  th:field="*{wsWebservice.webserviceName}"  th:readonly="true" id="promotion_filter" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:each="wbsrv : ${listWS_Webservice}"
+                                                    th:value="${wbsrv.webserviceName}"
+                                                    th:utext="${wbsrv.webserviceName}" />
+                                        </select>
+                                    </div>
+
+                                   <div class="form-group">
+                                        <label for="Description">Description</label>
+                                        <textarea   class="form-control" th:field="*{description}" 
+                                                    th:readonly="true"
+                                                    id="description" rows="4"></textarea>
+                                    </div>
+
+                                    <div class='input-group date' id='createTime'>
+                                        <input type="hidden" class="form-control"  th:field="*{createTime}" 
+                                               ng-model="dateString"  />
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <a th:href="@{/wsaccesmanagemets/list}" class="btn btn-secondary" role="button" title="Back-To list">
+                                <span aria-hidden="true"></span>Back To List
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </body>
+</html>

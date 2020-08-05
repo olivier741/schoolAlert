@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+<title>LIST PRODUCTS</title>
+    </head>
+    <body>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>List Products</h1>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">List Products</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+
+                            <div class="body">
+                                <div class="box-tools float-right">
+                                    <a href="/products/form" type="button" title="Add Product" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                                </div>
+                                Show <span sd:page-size-selector="javascript"></span> entries
+                                <div class="table-responsive">
+                                    <table id="table1" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                        <thead>
+                                            <tr>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="id"/>ID</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="productCode"/>Product Code</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="regFee"/>Reg Fee</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="restrictProduct"/>Restrict Product</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="startTime"/>Start Time</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="endTime"/>End Time</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="isFrameValidity"/>Frame Validity</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="pendingDuration"/>Pending Duration</th>
+                                                <th>Promotion</th>
+                                                <th>Service</th>
+
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="description"/>Descript</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="createTime"/>Create Date</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="updateTime"/>Update Date</th>
+                                                <th>View/Edit/Delete</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Product Code</th>
+                                                <th>Reg Fee</th>
+                                                <th>Restrict Product</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th>Frame Validity</th>
+                                                <th>Pending Duration</th>
+                                                <th>Promotion</th>
+                                                <th>Service</th>
+
+                                                <th>Description</th>
+                                                <th>Create Date</th>
+                                                <th>Update Date</th>
+                                                <th>View/Edit/Delete</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr th:each="row : ${products}">
+                                                <td th:text="${row.id}"></td>
+                                                <td th:text="${row.productCode}"></td>
+                                                <td th:text="${row.regFee}"></td>
+                                                <td th:text="${row.restrictProduct}"></td>
+                                                <td th:text="${#dates.format(row.startTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.endTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${row.isFrameValidity}"></td>
+                                                <td th:text="${row.pendingDuration}"></td>                                 
+                                                <td th:if="${row.promotion != null}" th:text="${row.promotion.promotionName}"></td>
+                                                <td th:if="${row.promotion == null}" ></td>
+
+                                                <td th:if="${row.service != null}" th:text="${row.service.serviceName}"></td>
+                                                <td th:if="${row.service == null}" ></td>
+
+                                                <td th:text="${row.description}"></td>
+                                                <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/products/view(id=${row.id})}"
+                                                       title="View Data"><i class="fas fa-eye"></i></a>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/products/form(id=${row.id})}"
+                                                       title="Edit Data"><i class="fas fa-edit"></i></a>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/products/delete(id=${row.id})}"
+                                                       title="Delete Data"><i class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="${#lists.isEmpty(products.content)}">
+                                                <td colspan="13" class="text-center">No data</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div th:if="${not #lists.isEmpty(products.content)}">
+                                <div sd:pagination-summary="">info</div>
+                                <div class="text-center float-right">
+                                    <nav>
+                                        <ul class="pagination" sd:pagination="full">
+                                            <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                            <li class="disabled"><a href="#" aria-label="Previous"><span
+                                                        aria-hidden="true">&laquo;</span></a></li>
+                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+    </body>
+</html>

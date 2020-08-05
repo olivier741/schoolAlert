@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>LIST REGISTERS</title>
+    </head>
+    <body>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>List Registers</h1>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">List Registers</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <!-- Main content -->
+            <section class="content">
+                <form data-toggle="validator" role="form" th:object="${searchForm}" th:action="@{/registers/list}" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">SEARCH BLOC</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <!-- checkbox -->
+                                            <div class="form-group">
+                                                <label for="transactionId">TransactionID</label>
+                                                <input type="text" class="form-control" 
+                                                       th:field="*{transactionId}" 
+                                                       th:readonly="${enableEdit}"
+                                                       id="transactionId" />
+
+                                            </div>
+                                        </div> 
+
+                                        <div class="col-sm-2">
+                                            <!-- radio -->
+                                            <div class="form-group">
+                                                <br />
+                                                <br />
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio_trans" value="1" th:field="*{trans_option}" />
+                                                    <label for="customRadio1" class="custom-control-label">Contain</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <!-- radio -->
+                                            <div class="form-group">
+                                                <br />
+                                                <br />
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio_trans" checked  value="2" th:field="*{trans_option}" />
+                                                    <label for="customRadio2" class="custom-control-label">Equal</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <!-- checkbox -->
+                                            <div class="form-group">
+                                                <label for="msisdn">MSISDN</label>
+                                                <input type="text" class="form-control" 
+                                                       th:field="*{msisdn}" 
+                                                       th:readonly="${enableEdit}"
+                                                       id="msisdn" />
+
+                                            </div>
+                                        </div> 
+
+                                        <div class="col-sm-2">
+                                            <!-- radio -->
+                                            <div class="form-group">
+                                                <br />
+                                                <br />
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio_msisdn" value="1" th:field="*{msisdn_option}" />
+                                                    <label for="customRadio3" class="custom-control-label">Contain</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <!-- radio -->
+                                            <div class="form-group">
+                                                <br />
+                                                <br />
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" id="customRadio4" name="customRadio_msisdn" checked  value="2" th:field="*{msisdn_option}" />
+                                                    <label for="customRadio4" class="custom-control-label">Equal</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                       
+                        <!-- /.card -->
+                        
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">FILTER BLOC</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Range Registration Date</label>
+                                                <div class='input-group' id='reg_daterange'>
+                                                    <i class="fa fa-calendar"></i>&nbsp;
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <br />
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1"  th:checked="${isRegTime}" >
+                                                    <label for="customCheckbox1" class="custom-control-label">Search By Registration Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class='input-group date' >
+                                            <input type="hidden" class="form-control" name="reg_dateFrom" th:field="*{reg_dateFrom}" 
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                        <div class='input-group date' >
+                                            <input type="hidden" class="form-control" name="reg_dateTo" th:field="*{reg_dateTo}"
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Range Renew Date</label>
+                                                <div class='input-group' id='renew_daterange'>
+                                                    <i class="fa fa-calendar"></i>&nbsp;
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <!-- radio -->
+                                             <div class="form-group">
+                                                  <br />
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="customCheckbox2" th:checked="${isRenewTime}" >
+                                                    <label for="customCheckbox2" class="custom-control-label">Search By Renew Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class='input-group date'>
+                                            <input type="hidden" class="form-control" name="renew_dateFrom" th:field="*{renew_dateFrom}" 
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                        <div class='input-group date'>
+                                            <input type="hidden" class="form-control" name="renew_dateTo" th:field="*{renew_dateTo}"
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                    </div>
+
+                                     <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Range Expire Date</label>
+                                                <div class='input-group' id='exp_daterange'>
+                                                    <i class="fa fa-calendar"></i>&nbsp;
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <br />
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="customCheckbox3"  th:checked="${isExpTime}" >
+                                                    <label for="customCheckbox3" class="custom-control-label">Search By Expire Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class='input-group date' >
+                                            <input type="hidden" class="form-control" name="exp_dateFrom" th:field="*{exp_dateFrom}" 
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                        <div class='input-group date' >
+                                            <input type="hidden" class="form-control" name="exp_dateTo" th:field="*{exp_dateTo}"
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Range UnRegistration Date</label>
+                                                <div class='input-group' id='unreg_daterange'>
+                                                    <i class="fa fa-calendar"></i>&nbsp;
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <!-- radio -->
+                                             <div class="form-group">
+                                                  <br />
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="customCheckbox4" th:checked="${isUnregTime}" >
+                                                    <label for="customCheckbox4" class="custom-control-label">Search By Unregistration Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class='input-group date'>
+                                            <input type="hidden" class="form-control" name="unreg_dateFrom" th:field="*{unreg_dateFrom}" 
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                        <div class='input-group date'>
+                                            <input type="hidden" class="form-control" name="unreg_dateTo" th:field="*{unreg_dateTo}"
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Range Cancellation Date</label>
+                                                <div class='input-group' id='cancel_daterange'>
+                                                    <i class="fa fa-calendar"></i>&nbsp;
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <!-- radio -->
+                                             <div class="form-group">
+                                                  <br />
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="customCheckbox5" th:checked="${isCancelTime}" >
+                                                    <label for="customCheckbox5" class="custom-control-label">Search By Cancellation Time</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class='input-group date'>
+                                            <input type="hidden" class="form-control" name="cancel_dateFrom" th:field="*{cancel_dateFrom}" 
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                        <div class='input-group date'>
+                                            <input type="hidden" class="form-control" name="cancel_dateTo" th:field="*{cancel_dateTo}"
+                                                   ng-model="dateString"  />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                    
+                 
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success float-right" title="Search Data">Search Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <br />
+            <br />
+            <section class="content">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+
+                            <div class="body">
+                                Show <span sd:page-size-selector="javascript"></span> entries
+                                <br />
+                                <br />
+                                <div class="table-responsive">
+                                    <table id="table1" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                        <thead>
+                                            <tr>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="id"/>ID</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="transactionId"/>TransID</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="msisdn"/>MSISDN</th>
+                                                <th>Product</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="numberReg"/>Number Reg</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="regTime"/>Reg Time</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="renewTime"/>Renew Time</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="expireTime"/>Expire Time</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="unregTime"/>UnReg Time</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="cancelTime"/>Cancel Time</th>
+
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="description"/>Description</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="createTime"/>Create Date</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="updateTime"/>Update Date</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>TransID</th>
+                                                <th>MSISDN</th>
+                                                <th>Product</th>
+                                                <th>Number Reg</th>
+                                                <th>Reg Time</th>
+                                                <th>Renew Time</th>
+                                                <th>Expire Time</th>
+                                                <th>UnReg Time</th>
+                                                <th>Cancel Time</th>
+
+                                                <th>Description</th>
+                                                <th>Create Date</th>
+                                                <th>Update Date</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr th:each="row : ${registers}">
+                                                <td th:text="${row.id}"></td>
+                                                <td th:text="${row.transactionId}"></td>
+                                                <td th:text="${row.msisdn}"></td>
+                                                <td th:if="${row.product != null}" th:text="${row.product.productCode}"></td>
+                                                <td th:if="${row.product == null}" ></td>
+                                                <td th:text="${row.numberReg}"></td>
+                                                <td th:text="${#dates.format(row.regTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.renewTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.unregTime, 'yyyy-MM-dd HH:mm:ss')}"></td>                                                                      
+                                                <td th:text="${#dates.format(row.cancelTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+
+                                                <td th:text="${row.description}"></td>
+                                                <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/registers/view(id=${row.id})}"
+                                                       title="View Data"><i class="fas fa-eye"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="${#lists.isEmpty(registers.content)}">
+                                                <td colspan="13" class="text-center">No data</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div th:if="${not #lists.isEmpty(registers.content)}">
+                                <div sd:pagination-summary="">info</div>
+                                <div class="text-center float-right">
+                                    <nav>
+                                        <ul class="pagination" sd:pagination="full">
+                                            <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                            <li class="disabled"><a href="#" aria-label="Previous"><span
+                                                        aria-hidden="true">&laquo;</span></a></li>
+                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+    </body>
+</html>

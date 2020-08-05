@@ -1,0 +1,158 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+    <head>
+        <title>Resters</title>
+    </head>
+    <body>
+        <section layout:fragment="header">
+            <h1>List Registers</h1>
+            <ol class="breadcrumb">
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Register</li>
+            </ol>
+        </section>
+        <div layout:fragment="content">
+            <div class="box">
+
+                <form data-toggle="validator" role="form" th:object="${searchForm}" th:action="@{/registers/list}" method="post">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="transactionId">TransactionID</label>
+                            <input type="text" class="form-control" 
+                                   th:field="*{transactionId}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:400px;" 
+                                   id="transactionId" />
+
+                            <input type="radio" id="option1" name="option1" class="custom-control-input" value="1" th:field="*{trans_option}">
+                            <label class="custom-control-label" for="option1">Contain</label>
+
+                            <input type="radio" id="option2" name="option2" class="custom-control-input" value="2" th:field="*{trans_option}">
+                            <label class="custom-control-label" for="option2">Equal</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="msisdn">MSISDN</label>
+                            <input type="text" class="form-control" 
+                                   th:field="*{msisdn}" 
+                                   th:readonly="${enableEdit}"
+                                   style="width:400px;" 
+                                   id="msisdn" />
+
+                            <input type="radio" id="option3" name="option3" class="custom-control-input" value="1" th:field="*{msisdn_option}">
+                            <label class="custom-control-label" for="option3">Contain</label>
+
+                            <input type="radio" id="option4" name="option4" class="custom-control-input" value="2" th:field="*{msisdn_option}">
+                            <label class="custom-control-label" for="option4">Equal</label>
+                        </div> 
+
+                        <div class="form-group">
+                            <label for="Daterange">Range Registration Date</label>
+                            <div class='input-group' style="width:200px;" id='daterange'>
+                                <i class="fa fa-calendar"></i>&nbsp;
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class='input-group date' style="width:800px;" id='createTime'>
+                            <input type="hidden" class="form-control" name="dateFrom" th:field="*{dateFrom}" 
+                                   ng-model="dateString"  />
+                        </div>
+
+                        <div class='input-group date' style="width:800px;" id='createTime'>
+                            <input type="hidden" class="form-control" name="dateTo" th:field="*{dateTo}"
+                                   ng-model="dateString"  />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="box-title btn btn-primary" style="width:200px;" title="Search Data">Search Data</button>
+                    </div>
+                </form>
+
+                <div>
+                    <a th:href="@{/registers/download.pdf}" class="btn btn-primary" target="_blank">Export PDF</a>
+                    <a th:href="@{/registers/download.xlsx}" class="btn btn-primary" target="_blank">Export Excel</a>
+                    <a th:href="@{/registers/download.csv}" class="btn btn-primary" target="_blank">Export CSV</a>
+                </div>
+
+                <br/>
+
+                <div class="box-body no-padding">
+                    Show <span sd:page-size-selector="javascript"></span> entries
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="table-product"  >
+                            <thead>
+                                <tr>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="id"/>ID</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="transactionId"/>TransID</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="msisdn"/>MSISDN</th>
+                                    <th>Product</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="numberReg"/>Number Reg</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="regTime"/>Reg Time</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="renewTime"/>Renew Time</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="expireTime"/>Expire Time</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="unregTime"/>UnReg Time</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="cancelTime"/>Cancel Time</th>
+
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="description"/>Descript</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="createTime"/>Create Date</th>
+                                    <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="updateTime"/>Update Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="row : ${registers}">
+                                    <td th:text="${row.id}"></td>
+                                    <td th:text="${row.transactionId}"></td>
+                                    <td th:text="${row.msisdn}"></td>
+                                    <td th:if="${row.product != null}" th:text="${row.product.productCode}"></td>
+                                    <td th:if="${row.product == null}" ></td>
+                                    <td th:text="${row.numberReg}"></td>
+                                    <td th:text="${#dates.format(row.regTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${#dates.format(row.renewTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${#dates.format(row.unregTime, 'yyyy-MM-dd HH:mm:ss')}"></td>                                                                      
+                                    <td th:text="${#dates.format(row.cancelTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+
+                                    <td th:text="${row.description}"></td>
+                                    <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td>
+                                        <a href="#" class="btn btn-default" th:href="@{/registers/view(id=${row.id})}"
+                                           title="View Data"><span class="glyphicon glyphicon-eye-open"></span></a>
+
+                                    </td>
+                                </tr>
+                                <tr th:if="${#lists.isEmpty(registers.content)}">
+                                    <td colspan="13" class="text-center">No data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
+
+                <div th:if="${not #lists.isEmpty(registers.content)}">
+
+                    <div sd:pagination-summary="">info</div>
+                    <div class="text-center">
+                        <nav>
+                            <ul class="pagination" sd:pagination="full">
+                                <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                <li class="disabled"><a href="#" aria-label="Previous"><span
+                                            aria-hidden="true">&laquo;</span></a></li>
+                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </body>
+</html>

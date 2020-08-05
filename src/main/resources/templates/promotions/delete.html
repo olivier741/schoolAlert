@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>DELETE PROMOTIONS</title>
+    </head>
+    <body>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Delete Promotion</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Delete Promotion</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <form data-toggle="validator" role="form" th:object="${promo}" th:action="@{/promotions/delete}" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 1</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <input type="hidden" th:field="*{id}"/>
+
+                                    <div class="form-group">
+                                        <label for="PromotionName">Promotion Name</label>
+                                        <input type="text" required="true" class="form-control" 
+                                               th:field="*{promotionName}" 
+                                               th:readonly="true"
+                                               id="promotionName" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="PromoFilter">Promotion Filter</label>
+                                        <select  class="form-control" th:readonly="true" th:field="*{promotionFilter}" id="promotionFilter" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:value="'TABLE'" th:text="TABLE"></option>
+                                            <option th:value="'REGEX'" th:text="REGEX"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="isTableSelected">Enable TABLE Filter</label>
+                                        <input   type="checkbox"   th:checked="${isTableSelected}" 
+                                                 th:field="*{isTableSelected}"
+                                                 th:disabled="${enableEdit}"th
+                                                 id="isTableSelected" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="regexString">REGEX</label>
+                                        <input type="text" class="form-control" th:readonly="true" th:field="*{msisdnRegex}"   id="msisdnRegex" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="StartTime">Start Time</label>
+                                        <div class="input-group date" id="startTime" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" th:readonly="true" data-target="#startTime"
+                                                   required="true" th:field="*{startTime}" 
+                                                   />
+                                            <div class="input-group-append" data-target="#startTime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="EndTime">End Time</label>
+                                        <div class="input-group date" id="endTime" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input"  th:readonly="true" data-target="#endTime"
+                                                   required="true" th:field="*{endTime}" 
+                                                   />
+                                            <div class="input-group-append" data-target="#endTime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Description">Description</label>
+                                        <textarea   class="form-control" th:readonly="true" th:field="*{description}" 
+                                                    id="description" rows="4"></textarea>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                            <!-- /.card -->
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 2</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="form-group">
+                                        <label for="ReductMode">Reduction Mode</label>
+                                        <select required="true"  class="form-control" th:field="*{reductionMode}"  th:readonly="${enableEdit}"
+                                                id="reduction_mode" >
+                                            <option th:value="'PERCENTAGE'" th:text="PERCENTAGE"></option>
+                                            <option th:value="'VALUE'" th:text="VALUE"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="PromoFee">Reduct Value</label>
+                                        <input type="number"  class="form-control" th:field="*{promotionRegFee}"  th:readonly="${enableEdit}" 
+                                               id="promotionRegFee" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="PercReduct">Reduct Percentage</label>
+                                        <input type="number" class="form-control" th:field="*{percentageReg}"  th:readonly="${enableEdit}"
+                                               id="percentageReg" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="IsExtend">Enable Extend</label>
+                                        <input   type="checkbox"   th:checked="${isExtend}" 
+                                                 th:field="*{isExtend}"
+                                                 th:disabled="${enableEdit}"th
+                                                 id="isExtend" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ExtFee">Reduct Extend Value</label>
+                                        <input type="number" class="form-control" th:field="*{promotionExtFee}" 
+                                               th:readonly="${enableEdit}"
+                                               id="promotionExtFee" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ExtRedPer">Reduct Extend By Percentage</label>
+                                        <input type="number" class="form-control" th:field="*{percentageExt}"  th:readonly="${enableEdit}"  id="percentageExt" />
+                                    </div>
+
+                                    <div class='input-group date'  id='createTime'>
+                                        <input type="hidden" class="form-control"  th:field="*{createTime}" 
+                                               ng-model="dateString"  />
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <a th:href="@{/promotions/list}" class="btn btn-secondary" role="button" title="Back-To list">
+                                <span aria-hidden="true"></span>Back To List
+                            </a>
+
+                            <button type="submit" class="btn btn-success float-right"  title="Delete Data">Delete</button>
+
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </body>
+</html>

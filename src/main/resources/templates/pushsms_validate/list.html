@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>LIST PUSH SMS TO VALIDATE</title>
+    </head>
+    <body>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>List Push SMS To Validate</h1>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">List Push SMS To Validate</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+
+                            <div class="body">
+                                Show <span sd:page-size-selector="javascript"></span> entries
+                                <div class="table-responsive">
+                                    <table id="table1" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                        <thead>
+                                            <tr>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="id"/>ID</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="pushName"/>Push Name</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="pushLevel"/>Push Level</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="message"/>SMS</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="startTime"/>Start Time</th>
+                                                <th>Service</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="description"/>Description</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="createTime"/>Create Date</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="updateTime"/>Update Date</th>
+                                                <th>View/Validate/Deny</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Push Name</th>
+                                                <th>Push Level</th>
+                                                <th>SMS</th>
+                                                <th>Start Time</th>
+                                                <th>Service</th>
+                                                <th>Description</th>
+                                                <th>Create Date</th>
+                                                <th>Update Date</th>
+                                                <th>View/Validate/Deny</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr th:each="row : ${pushsms_validate}">
+                                                <td th:text="${row.id}"></td>
+                                                <td th:text="${row.pushName}"></td>
+                                                <td th:text="${row.pushLevel}"></td>
+                                                <td th:text="${row.message}"></td>
+                                                <td th:text="${#dates.format(row.startTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:if="${row.service != null}" th:text="${row.service.serviceName}"></td>
+                                                <td th:if="${row.service == null}" ></td>
+                                                <td th:text="${row.description}"></td>
+                                                <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/pushsms_validate/view(id=${row.id})}"
+                                                       title="View Data"><i class="fas fa-eye"></i></a>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/pushsms_validate/form(id=${row.id})}"
+                                                       title="Validate Data"><i class="fas fa-edit"></i></a>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/pushsms_validate/deny(id=${row.id})}"
+                                                       title="Deny Data"><i class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="${#lists.isEmpty(pushsms_validate.content)}">
+                                                <td colspan="13" class="text-center">No data</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div th:if="${not #lists.isEmpty(pushsms_validate.content)}">
+                                <div sd:pagination-summary="">info</div>
+                                <div class="text-center float-right">
+                                    <nav>
+                                        <ul class="pagination" sd:pagination="full">
+                                            <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                            <li class="disabled"><a href="#" aria-label="Previous"><span
+                                                        aria-hidden="true">&laquo;</span></a></li>
+                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+    </body>
+</html>

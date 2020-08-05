@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>LIST WS-ACCESSMANAGEMENT</title>
+    </head>
+    <body>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>List WS-Accessmanagement</h1>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">List WS-Accessmanagement</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+
+                            <div class="body">
+                                <div class="box-tools float-right">
+                                    <a href="/wsaccesmanagemets/form" type="button" title="Add Product" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                                </div>
+                                Show <span sd:page-size-selector="javascript"></span> entries
+                                <div class="table-responsive">
+                                    <table id="table1" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                        <thead>
+                                            <tr>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="id"/>ID</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="accessName"/>AccessMgnt Name</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="maxConnexionAllocate"/>Max Connection</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="maxRequestAllocate"/>Max Request</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="startTime"/>Start Time</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="endTime"/>End Time</th>
+                                                <th>WS Client</th>
+                                                <th>WS Webservice</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="description"/>Descript</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="createTime"/>Create Date</th>
+                                                <th><a class="fa fa-fw fa-sort"/><a class="sorted" sd:pagination-sort="updateTime"/>Update Date</th>
+                                                <th>View/Edit/Delete</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>AccessMgnt Name</th>
+                                                <th>Max Connection</th>
+                                                <th>Max Request</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th>WS Client</th>
+                                                <th>WS Webservice</th>
+                                                <th>Description</th>
+                                                <th>Create Date</th>
+                                                <th>Update Date</th>
+                                                <th>View/Edit/Delete</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr th:each="row : ${wsaccesmanagemets}">
+                                                <td th:text="${row.id}"></td>
+                                                <td th:text="${row.accessName}"></td>
+                                                <td th:text="${row.maxConnexionAllocate}"></td>
+                                                <td th:text="${row.maxRequestAllocate}"></td>
+                                                <td th:text="${#dates.format(row.startTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.endTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:if="${row.wsClient != null}" th:text="${row.wsClient.clientName}"></td>
+                                                <td th:if="${row.wsClient == null}" ></td>
+                                                <td th:if="${row.wsWebservice != null}" th:text="${row.wsWebservice.webserviceName}"></td>
+                                                <td th:if="${row.wsWebservice == null}" ></td>
+
+                                                <td th:text="${row.description}"></td>
+                                                <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/wsaccesmanagemets/view(id=${row.id})}"
+                                                       title="View Data"><i class="fas fa-eye"></i></a>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/wsaccesmanagemets/form(id=${row.id})}"
+                                                       title="Edit Data"><i class="fas fa-edit"></i></a>
+                                                    <a href="#" class="btn btn-outline-success" th:href="@{/wsaccesmanagemets/delete(id=${row.id})}"
+                                                       title="Delete Data"><i class="fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr th:if="${#lists.isEmpty(wsaccesmanagemets.content)}">
+                                                <td colspan="13" class="text-center">No data</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div th:if="${not #lists.isEmpty(wsaccesmanagemets.content)}">
+                                <div sd:pagination-summary="">info</div>
+                                <div class="text-center float-right">
+                                    <nav>
+                                        <ul class="pagination" sd:pagination="full">
+                                            <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                            <li class="disabled"><a href="#" aria-label="Previous"><span
+                                                        aria-hidden="true">&laquo;</span></a></li>
+                                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+    </body>
+</html>

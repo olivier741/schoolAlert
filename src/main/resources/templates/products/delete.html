@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>DELETE PRODUCTS</title>
+    </head>
+    <body>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Delete Product</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Delete Product</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <form data-toggle="validator" role="form" th:object="${product}" th:action="@{/products/delete}" method="post">
+                      <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 1</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <input type="hidden" th:field="*{id}"/>
+
+
+                                    <div class="form-group">
+                                        <label for="productCode">Product Code</label>
+                                        <input type="text" required="true" class="form-control" 
+                                               th:field="*{productCode}" 
+                                               th:readonly="true"
+                                               id="productCode" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="RegFee">Registration Fee</label>
+                                        <input type="number"  class="form-control" th:field="*{regFee}"  required="true" th:readonly="true" id="regFee" />
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label for="Promo">Promotion</label>
+                                        <select  class="form-control"  th:field="*{promotion.promotionName}" th:readonly="true"   id="promotion_filter" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:each="promo : ${listPromotion}"
+                                                    th:value="${promo.promotionName}"
+                                                    th:utext="${promo.promotionName}" />
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Service">Service</label>
+                                        <select  class="form-control"  th:field="*{service.serviceName}" required="true"  th:readonly="true" id="promotion_filter" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:each="srv : ${listService}"
+                                                    th:value="${srv.serviceName}"
+                                                    th:utext="${srv.serviceName}" />
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="RestrictProduct">Product Restricted</label>
+                                        <input type="text"  class="form-control" 
+                                               th:field="*{restrictProduct}" 
+                                               th:readonly="true"
+                                               id="restrictProduct" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="StartTime">Start Time</label>
+                                        <div class="input-group date" id="startTime" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#startTime"
+                                                   required="true" th:field="*{startTime}"   th:readonly="true"
+                                                   />
+                                            <div class="input-group-append" data-target="#startTime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="EndTime">End Time</label>
+                                        <div class="input-group date" id="endTime" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#endTime"
+                                                   required="true" th:field="*{endTime}"  th:readonly="true"
+                                                   />
+                                            <div class="input-group-append" data-target="#endTime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label for="Description">Description</label>
+                                        <textarea   class="form-control" th:field="*{description}" 
+                                                    th:readonly="true"
+                                                    id="description" rows="4"></textarea>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 2</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label for="isFrameValidity">Enable Frame Validity</label>
+                                        <input   type="checkbox"  th:checked="${isFrameValidity}" 
+                                                 th:field="*{isFrameValidity}"
+                                                 th:readonly="true"
+                                                 th:disabled="${enableEdit}" id="isFrameValidity" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="RestConstVal">Restrict Constant Validity</label>
+                                        <input type="text" class="form-control" 
+                                               th:field="*{restrictConstantValidity}" 
+                                               th:readonly="true"
+                                               id="restrictConstantValidity" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="FrameVal">Frame Time Validity</label>
+                                        <input type="text"  class="form-control" 
+                                               th:field="*{frameTimeValidity}" 
+                                               th:readonly="true"
+                                               id="frameTimeValidity" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="Validity">Validity</label>
+                                        <input type="text"  class="form-control" 
+                                               th:field="*{validity}" 
+                                               th:readonly="true"
+                                               id="validity" />
+                                    </div> 
+
+
+                                    <div class="form-group">
+                                        <label for="PendingDuration">Pending Duration</label>
+                                        <input type="text" required="true" class="form-control" 
+                                               th:field="*{pendingDuration}" 
+                                               th:readonly="true"
+                                               id="pendingDuration" />
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="isExtend">Enable Extend</label>
+                                        <input   type="checkbox"   th:checked="${isExtend}" 
+                                                 th:field="*{isExtend}"
+                                                 th:disabled="${enableEdit}"
+                                                 th:readonly="true"
+                                                 id="isExtend" />
+
+                                        <label for="isOverideReg">Enable Override Registration</label>
+                                        <input   type="checkbox"   th:checked="${isOverideReg}" 
+                                                 th:field="*{isOverideReg}"
+                                                 th:disabled="${enableEdit}"
+                                                 id="isOverideReg" />
+
+                                        <label for="isNotifyExtend">Enable Extend Notification</label>
+                                        <input   type="checkbox"   th:checked="${isNotifyExtend}" 
+                                                 th:field="*{isNotifyExtend}"
+                                                 th:readonly="true"
+                                                 th:disabled="${enableEdit}"
+                                                id="isNotifyExtend" />
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="ExtendFee">Extend Fee</label>
+                                        <input type="number"  class="form-control" th:field="*{extendFee}"  th:readonly="true"
+                                                id="extendFee" />
+                                    </div>
+
+
+                                    <div class='input-group date'  id='createTime'>
+                                        <input type="hidden" class="form-control"  th:field="*{createTime}" 
+                                               ng-model="dateString"  />
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <a th:href="@{/products/list}" class="btn btn-secondary" role="button" title="Back-To list">
+                                <span aria-hidden="true"></span>Back To List
+                            </a>
+
+                            <button type="submit" class="btn btn-success float-right"  title="Delete Data">Delete</button>
+
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </body>
+</html>

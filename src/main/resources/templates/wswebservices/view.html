@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+    <head>
+        <title>VIEW WS-WEBSERVICES</title>
+    </head>
+    <body>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" layout:fragment="content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>View WS-Webservice</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">View WS-Webservice</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <form data-toggle="validator" role="form" th:object="${wsrv}" th:action="@{/wswebservices/form}" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 1</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <input type="hidden" th:field="*{id}"/>
+
+                                    <div class="form-group">
+                                        <label for="webserviceName">WS_Webservice Name</label>
+                                        <input type="text" required="true" class="form-control" th:field="*{webserviceName}"
+                                              th:readonly="true"
+                                               id="webserviceName" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="remoteOperator">Operator</label>
+                                        <input type="text" class="form-control" th:field="*{remoteOperator}"
+                                               th:readonly="true"
+                                               id="remoteOperator" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="apiUrl">URL</label>
+                                        <input type="text" class="form-control" th:field="*{apiUrl}"
+                                              th:readonly="true"
+                                               id="apiUrl" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="webserviceType">Webservice Type</label>
+                                        <select  class="form-control" th:field="*{webserviceType}" th:readonly="true" id="webserviceType" >
+                                            <option th:value="'SOAP'" th:text="SOAP"></option>
+                                            <option th:value="'REST'" th:text="REST"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="apiSoapWsdl">SOAP WSDL</label>
+                                        <textarea  rows = "5" class="form-control" th:field="*{apiSoapWsdl}"
+                                                 th:readonly="true"
+                                                   id="apiSoapWsdl" >...</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="apiSoapXsd">SOAP XSD</label>
+                                        <textarea  rows = "5" class="form-control" th:field="*{apiSoapXsd}"
+                                                  th:readonly="true"
+                                                   id="apiSoapXsd" >...</textarea>
+                                    </div>
+
+                                     <div class="form-group">
+                                        <label for="apiSoapRequestHeader">SOAP Request Header</label>
+                                        <textarea  rows = "5" class="form-control" th:field="*{apiSoapRequestHeader}"
+                                                   th:readonly="true"
+                                                   id="apiSoapRequestHeader" >...</textarea>
+                                    </div>
+
+                                   <div class="form-group">
+                                        <label for="apiSoapRequestBody">SOAP Request Body</label>
+                                        <textarea  rows = "5" class="form-control" th:field="*{apiSoapRequestBody}"
+                                                   th:readonly="true"
+                                                   id="apiSoapRequestBody" >...</textarea>
+                                    </div>
+
+
+
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 2</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+
+
+                                    <div class="form-group">
+                                        <label for="apiRestUri">Rest URI</label>
+                                        <input type="text"  class="form-control" th:field="*{apiRestUri}"
+                                              th:readonly="true"
+                                               id="apiRestUri" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="apiRestMethod">Webservice Method</label>
+                                        <select  class="form-control" th:field="*{apiRestMethod}"  th:readonly="true" id="apiRestMethod" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:value="'POST'" th:text="POST"></option>
+                                            <option th:value="'GET'" th:text="GET"></option>
+                                            <option th:value="'HEAD'" th:text="HEAD"></option>
+                                            <option th:value="'PUT'" th:text="PUT"></option>
+                                            <option th:value="'PATCH'" th:text="PATCH"></option>
+                                            <option th:value="'DELETE'" th:text="DELETE"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="restMediaType">Media Type</label>
+                                        <input type="text"  class="form-control" th:field="*{restMediaType}"
+                                              th:readonly="true"
+                                               id="restMediaType" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="contentType">Content Type</label>
+                                        <input type="text"  class="form-control" th:field="*{contentType}"
+                                               th:readonly="true"
+                                               id="contentType" />
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <label for="apiRestRequest">Rest Request</label>
+                                        <textarea  rows = "5" class="form-control" th:field="*{apiRestRequest}"
+                                                  th:readonly="true"
+                                                   id="apiRestRequest" >...</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="restBindParam">Binding Parameter</label>
+                                        <select  class="form-control" th:field="*{restBindParam}" th:readonly="true" id="restBindParam" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:value="'PATHPARAM'" th:text="PATHPARAM"></option>
+                                            <option th:value="'QUERYPARAM'" th:text="QUERYPARAM"></option>
+                                            <option th:value="'MATRIXPARAM'" th:text="MATRIXPARAM"></option>
+                                            <option th:value="'HEADERPARAM'" th:text="HEADERPARAM"></option>
+                                            <option th:value="'COOKIEPARAM'" th:text="COOKIEPARAM"></option>
+                                            <option th:value="'FORMPARAM'" th:text="FORMPARAM"></option>
+                                            <option th:value="'DEFAULTVALUE'" th:text="DEFAULTVALUE"></option>
+                                            <option th:value="'CONTEXT'" th:text="CONTEXT"></option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="remoteConTimeout">Connection TimeOut</label>
+                                        <input type="number"  class="form-control" th:field="*{remoteConTimeout}" th:readonly="true"
+                                               id="remoteConTimeout" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="remoteReqTimeout">Request TimeOut</label>
+                                        <input type="number"  class="form-control" th:field="*{remoteReqTimeout}" th:readonly="true"
+                                               id="remoteReqTimeout" />
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">BLOC 3</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="form-group">
+                                        <label for="remoteSecutityMode">Security Mode</label>
+                                        <select  class="form-control" th:field="*{remoteSecutityMode}"  th:readonly="true"  id="remoteSecutityMode" >
+                                            <option th:value="'NONE'" th:text="NONE"></option>
+                                            <option th:value="'SOAP_BASIC_AUTH'" th:text="SOAP_BASIC_AUTH"></option>
+                                            <option th:value="'SOAP_HEAD_TOKEN'" th:text="SOAP_HEAD_TOKEN"></option>
+                                            <option th:value="'SOAP_HEAD_AUTH'" th:text="SOAP_HEAD_AUTH"></option>
+                                            <option th:value="'REST_BASIC_AUTH'" th:text="REST_BASIC_AUTH"></option>
+                                            <option th:value="'REST_TOKEN_AUTH'" th:text="REST_TOKEN_AUTH"></option>
+                                            <option th:value="'REST_TOKEN_AUTH_ROLE'" th:text="REST_TOKEN_AUTH_ROLE"></option>
+                                            <option th:value="'REST_OAUTH1'" th:text="REST_OAUTH1"></option>
+                                            <option th:value="'REST_OAUTH2'" th:text="REST_OAUTH2"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="securityLogin">Security Login</label>
+                                        <input type="text" class="form-control" th:field="*{securityLogin}"
+                                               th:readonly="true"
+                                               id="securityLogin" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="securityPassword">Security Password</label>
+                                        <input type="text" class="form-control" th:field="*{securityPassword}"
+                                               th:readonly="true"
+                                               id="securityLogin" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="authorizationType">Token Authorization Type</label>
+                                        <input type="text" class="form-control" th:field="*{authorizationType}"
+                                               th:readonly="true"
+                                               id="authorizationType" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="token">Token</label>
+                                        <input type="text" class="form-control" th:field="*{token}"
+                                               th:readonly="true"
+                                               id="token" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="StartTime">Token Expire Time</label>
+                                        <div class="input-group date" id="startTime" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#startTime"
+                                                   th:field="*{expireTimeToken}"   th:readonly="true"
+                                                   />
+                                            <div class="input-group-append" data-target="#startTime" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="remoteMaxConnexion">Max Connection</label>
+                                        <input type="number"  class="form-control" th:field="*{remoteMaxConnexion}" th:readonly="true"
+                                               id="remoteMaxConnexion" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="remoteMaxRequest">Max Request</label>
+                                        <input type="number"  class="form-control" th:field="*{remoteMaxRequest}" th:readonly="true"
+                                               id="remoteMaxRequest" />
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="Description">Description</label>
+                                        <textarea   class="form-control" th:field="*{description}" 
+                                                    th:readonly="true"
+                                                    id="description" rows="4"></textarea>
+                                    </div>
+
+
+
+                                    <div class='input-group date' id='createTime'>
+                                        <input type="hidden" class="form-control"  th:field="*{createTime}" 
+                                               ng-model="dateString"  />
+                                    </div>
+
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <a th:href="@{/wswebservices/list}" class="btn btn-secondary" role="button" title="Back-To list">
+                                <span aria-hidden="true"></span>Back To List
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </body>
+</html>
